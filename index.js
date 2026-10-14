@@ -77,7 +77,7 @@ function init() {
     }
 }
 
-// Ensure execution runs whether DOM is already loaded or still loading
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
