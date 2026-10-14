@@ -45,41 +45,41 @@ const bookStore = {
 
 // Write your code here!
 
-// 2.2 Manipulating Existing Element
-// 1. Select Title Element
-const bookStoreTitle = document.getElementById('header');
+function init() {
+    // 2.2 Manipulating Existing Element
+    const bookStoreTitle = document.getElementById('header');
+    if (bookStoreTitle) {
+        bookStoreTitle.textContent = bookStore.name;
+    }
 
-// 2. Change element to match bookstore name
-bookStoreTitle.textContent = bookStore.name;
+    // 2.3 Book Element Generation
+    const bookList = document.getElementById('book-list');
+    if (bookList) {
+        bookStore.books.forEach((book) => {
+            const bookContainer = document.createElement('li');
+            const bookTitle = document.createElement('h3');
+            const bookAuthor = document.createElement('p');
+            const bookImage = document.createElement('img');
 
+            bookContainer.classList.add('list-li');
 
-// 2.3 Book Element Generation
-// Select the container <ul> element
-const bookList = document.getElementById('book-list');
+            bookTitle.textContent = book.title;
+            bookAuthor.textContent = book.author;
+            bookImage.src = book.imageUrl;
+            bookImage.alt = book.title;
 
-// Loop through every book in bookStore.books
-bookStore.books.forEach((book) => {
-    // 1. Create elements for each book
-    const bookContainer = document.createElement('li');
-    const bookTitle = document.createElement('h3');
-    const bookAuthor = document.createElement('p');
-    const bookImage = document.createElement('img');
+            bookContainer.appendChild(bookTitle);
+            bookContainer.appendChild(bookAuthor);
+            bookContainer.appendChild(bookImage);
 
-    // Add class to apply styling from style.css
-    bookContainer.classList.add('list-li');
+            bookList.appendChild(bookContainer);
+        });
+    }
+}
 
-    // 2. Change textContent and src to match book object
-    bookTitle.textContent = book.title;
-    bookAuthor.textContent = book.author;
-    bookImage.src = book.imageUrl;
-    bookImage.alt = book.title;
-
-    // 3. Append book elements to bookContainer
-    bookContainer.appendChild(bookTitle);
-    bookContainer.appendChild(bookAuthor);
-    bookContainer.appendChild(bookImage);
-
-    // Append bookContainer to bookList
-    bookList.appendChild(bookContainer);
-});
-
+// Ensure execution runs whether DOM is already loaded or still loading
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
