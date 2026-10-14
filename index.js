@@ -45,3 +45,41 @@ const bookStore = {
 
 // Write your code here!
 
+// 2.2 Manipulating Existing Element
+// 1. Select Title Element
+const bookStoreTitle = document.getElementById('header');
+
+// 2. Change element to match bookstore name
+bookStoreTitle.textContent = bookStore.name;
+
+
+// 2.3 Book Element Generation
+// Select the container <ul> element
+const bookList = document.getElementById('book-list');
+
+// Loop through every book in bookStore.books
+bookStore.books.forEach((book) => {
+    // 1. Create elements for each book
+    const bookContainer = document.createElement('li');
+    const bookTitle = document.createElement('h3');
+    const bookAuthor = document.createElement('p');
+    const bookImage = document.createElement('img');
+
+    // Add class to apply styling from style.css
+    bookContainer.classList.add('list-li');
+
+    // 2. Change textContent and src to match book object
+    bookTitle.textContent = book.title;
+    bookAuthor.textContent = book.author;
+    bookImage.src = book.imageUrl;
+    bookImage.alt = book.title;
+
+    // 3. Append book elements to bookContainer
+    bookContainer.appendChild(bookTitle);
+    bookContainer.appendChild(bookAuthor);
+    bookContainer.appendChild(bookImage);
+
+    // Append bookContainer to bookList
+    bookList.appendChild(bookContainer);
+});
+
